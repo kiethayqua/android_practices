@@ -10,25 +10,24 @@ import com.anushka.bindingdemo2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var button: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        button = binding.controlButton
-        button.setOnClickListener {
+        binding.controlButton.setOnClickListener {
             startOrStopProgressBar()
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun startOrStopProgressBar() {
-        val progressBar = binding.progressBar
-        if (progressBar.visibility == View.GONE) {
-            progressBar.visibility = View.VISIBLE
-            button.text = "Stop"
-        } else {
-            progressBar.visibility = View.GONE
-            button.text = "Start"
+        binding.apply {
+            if (progressBar.visibility == View.GONE) {
+                progressBar.visibility = View.VISIBLE
+                controlButton.text = "Stop"
+            } else {
+                progressBar.visibility = View.GONE
+                controlButton.text = "Start"
+            }
         }
     }
 }
